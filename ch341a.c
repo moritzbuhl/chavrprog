@@ -71,10 +71,12 @@ int32_t ch341Configure(uint16_t vid, uint16_t pid)
 
     if(libusb_kernel_driver_active(devHandle, 0)) {
         ret = libusb_detach_kernel_driver(devHandle, 0);
+#ifndef __OpenBSD__
         if(ret) {
             fprintf(stderr, "Failed to detach kernel driver: '%s'\n", strerror(-ret));
             goto close_handle;
         }
+#endif
     }
 
     ret = libusb_claim_interface(devHandle, 0);

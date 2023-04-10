@@ -385,6 +385,7 @@ void read_locks(){
 void ch_init(void){
   ch341_init();
   toggle_reset(1);
+  usleep(20000);
   chip_prog_enable();
   check_signature();
 }
